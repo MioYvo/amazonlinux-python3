@@ -62,7 +62,7 @@ RUN yum update -y && \
 	\
     pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 --no-cache-dir install -U && \
     pip3 install --no-cache-dir wheel && \
-    yum remove -y gcc perl make findutils && \
+    yum remove -y gcc perl make && \
     package-cleanup -q --leaves --all | xargs -l1 yum -y remove && \
     yum -y autoremove && \
     yum clean all && \
