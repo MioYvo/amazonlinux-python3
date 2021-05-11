@@ -9,8 +9,8 @@ ENV LANG C.UTF-8
 ENV PYTHON_VERSION 3.9.5
 
 RUN yum update -y && \
-    yum install -y yum-utils tzdata tar gcc \
-    libffi libffi-devel expat-devel zlib-devel \
+    yum install -y yum-utils tar gcc \
+    libffi-devel expat-devel zlib-devel \
     gdbm-devel \
     xz xz-devel \
     bzip2-devel \
@@ -21,8 +21,7 @@ RUN yum update -y && \
     sqlite-devel \
     openssl-devel \
     make \
-    wget \
-    findutils && \
+    wget && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
 #    wget -O python.tar.xz "https://npm.taobao.org/mirrors/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" && \
     wget -O python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" && \
