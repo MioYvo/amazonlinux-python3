@@ -10,7 +10,7 @@ ENV LANG C.UTF-8
 
 RUN yum update -y && \
     yum install -y python3.7 tzdata python3-devel gcc yum-utils && \
-	python3 --version \
+	python3 --version && \
 	# Upgrade pip and install poetry :>
     pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 --no-cache-dir install -U && \
     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python - && \
