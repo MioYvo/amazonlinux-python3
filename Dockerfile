@@ -22,14 +22,16 @@ RUN yum update -y && \
     openssl-devel \
     make \
     wget && \
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-#    wget -O python.tar.xz "https://npm.taobao.org/mirrors/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" && \
+    # For Chinese user:
+    # cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    # wget -O python.tar.xz "https://npm.taobao.org/mirrors/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" && \
     wget -O python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" && \
     mkdir -p /usr/src/python && \
     tar -xJC /usr/src/python --strip-components=1 -f python.tar.xz && \
     rm python.tar.xz && \
     \
     cd /usr/src/python && \
+    # Copy from Python offical docker repo
     ./configure \
 #		--build="$gnuArch" \
 		--build="x86_64-linux-gnu" \
@@ -59,8 +61,11 @@ RUN yum update -y && \
 	&& ln -s python3 python \
 	&& ln -s python3-config python-config && \
 	\
+	# Upgrade pip and install poetry :>
     pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 --no-cache-dir install -U && \
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python - && \
     pip3 install --no-cache-dir wheel && \
+    pip cache purge && rm -rf ~/.cache/pypoetry/cache/* && \
     yum remove -y gcc perl make && \
     package-cleanup -q --leaves --all | xargs -l1 yum -y remove && \
     yum -y autoremove && \

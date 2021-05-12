@@ -6,3 +6,6 @@ Python(3.9) docker image based on amazonlinux2.
 2. Security
    1. AWS provides ongoing security and maintenance updates to all instances running Amazon Linux.
    2. Alpine is secure as well known.
+
+### Additional features
+1. `poetry` installed
