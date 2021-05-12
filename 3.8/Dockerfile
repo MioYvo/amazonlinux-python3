@@ -6,7 +6,7 @@ ENV PATH /usr/local/bin:$PATH
 # http://bugs.python.org/issue19846
 # > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
 ENV LANG C.UTF-8
-ENV PYTHON_VERSION 3.9.5
+ENV PYTHON_VERSION 3.8.6
 
 RUN yum update -y && \
     yum install -y yum-utils tar gcc \
@@ -66,7 +66,7 @@ RUN yum update -y && \
     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python - && \
     export PATH="/root/.local/bin:$PATH" && \
     pip3 install --no-cache-dir wheel && \
-    pip cache purge && rm -rf ~/.cache/pypoetry/cache/* && \
+    pip3 cache purge && rm -rf ~/.cache/pypoetry/cache/* && \
     yum remove -y gcc perl make && \
     package-cleanup -q --leaves --all | xargs -l1 yum -y remove && \
     yum -y autoremove && \
