@@ -64,6 +64,7 @@ RUN yum update -y && \
 	# Upgrade pip and install poetry :>
     pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 --no-cache-dir install -U && \
     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python - && \
+    export PATH="/root/.local/bin:$PATH" && \
     pip3 install --no-cache-dir wheel && \
     pip cache purge && rm -rf ~/.cache/pypoetry/cache/* && \
     yum remove -y gcc perl make && \
