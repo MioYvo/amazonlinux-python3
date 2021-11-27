@@ -1,5 +1,5 @@
 # amazonlinux-python3 
-Python(3.9) docker image based on amazonlinux2.
+Python3 docker image based on amazonlinux2.Python3.7 use al2's yum repo, 3.8 and 3.9 build from source code.
 
 ### Why amazonlinux not alpine?
 1. Build fast, alpine often build package from source due to musl lib.
