@@ -6,7 +6,7 @@ ENV PATH /usr/local/bin:/root/.local/bin:$PATH
 # http://bugs.python.org/issue19846
 # > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
 ENV LANG C.UTF-8
-ENV PYTHON_VERSION 3.8.6
+ENV PYTHON_VERSION 3.8.12
 
 RUN yum update -y && \
     yum install -y yum-utils tar gcc \
