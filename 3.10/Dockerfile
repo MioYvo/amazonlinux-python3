@@ -9,7 +9,8 @@ ENV LANG C.UTF-8
 ENV PYTHON_VERSION 3.10.4
 
 RUN yum update -y && \
-    yum install -y yum-utils tar gcc \
+    yum install -y yum-plugin-ovl && \
+    yum install -y yum-utils tar gcc10 \
     libffi-devel expat-devel zlib-devel \
     gdbm-devel \
     xz xz-devel \
@@ -22,6 +23,8 @@ RUN yum update -y && \
     openssl11 openssl11-devel \
     make \
     wget && \
+    ln -s /usr/bin/gcc10-gcc /usr/bin/gcc && \
+    ln -s /usr/bin/gcc10-ar /usr/bin/ar && \
     # For Chinese user:
     # cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     # wget -O python.tar.xz "https://npm.taobao.org/mirrors/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" && \
@@ -67,7 +70,7 @@ RUN yum update -y && \
     export PATH="/root/.local/bin:$PATH" && \
     pip3 install --no-cache-dir wheel && \
 #    pip3 cache purge && rm -rf ~/.cache/pypoetry/cache/* && \
-    yum remove -y gcc perl make && \
+    yum remove -y gcc10 perl make && \
     package-cleanup -q --leaves --all | xargs -l1 yum -y remove && \
     yum -y autoremove && \
     yum clean all && \
